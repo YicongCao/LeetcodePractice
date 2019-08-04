@@ -84,7 +84,7 @@
  * @return {number}
  */
 var romanToInt = function (s) {
-    var symbols = {
+    const symbols = {
         "I": 1,
         "V": 5,
         "X": 10,
@@ -93,41 +93,19 @@ var romanToInt = function (s) {
         "D": 500,
         "M": 1000
     }
-    // IV: 4
-    // ret: 0 -1 5-1
-    // lastdigit: 0 1 5
-    // digit: 1 5 n/a
-
-    // LVIII: 50+5+3
-    // ret: 0 50 50+5+1+1+1
-    // lastdigit: 0 50 5 1 1 1
-    // digit: 50 5 1 1 1 n/a
-
-    // MCMXCIV: 1000+900+90+4
-    // ret: 0 1000-100+1000-10+100-1+5
-    // lastdigit: 0 1000 100 1000 10 100 1 5
-    // digit: 1000 100 1000 10 100 1 5 n/a
-    var largest = 0
     var ret = 0
     var digit = 0
     var lastdigit = 0
-    // var debug_digit = []
-    // var debug_last_digit = []
-    // var debug_ret = ""
     for (var i = 0; i < s.length; i++) {
         digit = symbols[s[i]]
-        // debug_last_digit.push(lastdigit)
-        // debug_digit.push(digit)
         if (lastdigit != 0) {
             if (digit < lastdigit) {
                 ret += lastdigit
-                // debug_ret += "+" + String(lastdigit)
                 lastdigit = digit
             } else if (digit == lastdigit) {
                 lastdigit += digit
             } else {
                 ret += (0 - lastdigit)
-                // debug_ret += "-" + String(lastdigit)
                 lastdigit = digit
             }
         } else {
@@ -135,11 +113,23 @@ var romanToInt = function (s) {
         }
     }
     ret += lastdigit
-    // debug_ret += "+" + String(lastdigit)
-    // console.log("ret:", debug_ret)
-    // console.log("lastdigit:", debug_last_digit)
-    // console.log("digit:", debug_digit)
     return ret
 };
+
+
+// IV: 4
+// ret: 0 -1 5-1
+// lastdigit: 0 1 5
+// digit: 1 5 n/a
+
+// LVIII: 50+5+3
+// ret: 0 50 50+5+1+1+1
+// lastdigit: 0 50 5 1 1 1
+// digit: 50 5 1 1 1 n/a
+
+// MCMXCIV: 1000+900+90+4
+// ret: 0 1000-100+1000-10+100-1+5
+// lastdigit: 0 1000 100 1000 10 100 1 5
+// digit: 1000 100 1000 10 100 1 5 n/a
 
 // console.log(romanToInt("XLCDM"))
