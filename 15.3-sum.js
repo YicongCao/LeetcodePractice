@@ -49,16 +49,22 @@ var threeSum = function (nums) {
         }
         triplets.push(threes)
     }
-    nums.sort()
-    for (var x = 0; x < nums.length; x++) {
-        if (nums[x] > 0) {
-            break
-        }
-        for (var y = x + 1; y < nums.length; y++) {
-            for (var z = y + 1; z < nums.length; z++) {
-                if (nums[x] + nums[y] + nums[z] == 0) {
-                    appendTriplets([nums[x], nums[y], nums[z]])
-                }
+    nums.sort((a, b) => a - b)
+    const len = nums.length
+    for (var i = 0; i < nums.length; i++) {
+        var target = nums[i]
+        var low = i + 1, high = len - 1
+        while (low < high) {
+            if (nums[low] + nums[high] + target == 0) {
+                appendTriplets([target, nums[low], nums[high]])
+                do {
+                    low++
+                } while (nums[low] == nums[low - 1])
+            }
+            else if (nums[low] + nums[high] < 0 - target) {
+                low++
+            } else {
+                high--
             }
         }
     }
