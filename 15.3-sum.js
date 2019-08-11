@@ -47,14 +47,20 @@ var threeSum = function (nums) {
                 return
             }
         }
-        // triplets.push(threes.concat())
         triplets.push(threes)
     }
+    nums.sort()
     for (var x = 0; x < nums.length; x++) {
         for (var y = 0; y < nums.length; y++) {
+            if (x == y) {
+                continue
+            }
             for (var z = 0; z < nums.length; z++) {
-                if (x == y || y == z || x == z) {
+                if (y == z || x == z) {
                     continue
+                }
+                if (nums[z] > 0) {
+                    break
                 }
                 if (nums[x] + nums[y] + nums[z] == 0) {
                     appendTriplets([nums[x], nums[y], nums[z]])
